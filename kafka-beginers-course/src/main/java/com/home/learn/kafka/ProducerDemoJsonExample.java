@@ -9,6 +9,9 @@ import org.apache.kafka.common.serialization.StringSerializer;
 
 public class ProducerDemoJsonExample {
 	
+	/**
+	 * @param args
+	 */
 	public static void main(String [] args) {
 	
 		String bootStrapServer="127.0.0.1:9092";
@@ -20,18 +23,27 @@ public class ProducerDemoJsonExample {
 			
 		
 		//cretate Kafka produver infues with property
-		KafkaProducer<String, Customer> producer=new KafkaProducer<String, Customer>(properties);
+		KafkaProducer<String, Customer> customerProducer=new KafkaProducer<String, Customer>(properties);
+		KafkaProducer<String, Address> addressProducer=new KafkaProducer<String, Address>(properties);
 		
 		//Customer obj to sed
 		Customer cus=new Customer(1, "Munendra");
+		//Address Obj to send
+		Address address=new Address("RukminiNaga", 268);
 		
 		//create Producer Records
-		ProducerRecord<String, Customer> record=new ProducerRecord<String, Customer>("first_topic", cus);
+		ProducerRecord<String, Customer> customerRrecord=new ProducerRecord<String, Customer>("first_topic", cus);
+		ProducerRecord<String, Address> addressRecord=new ProducerRecord<String, Address>("first_topic", address);
 		
-		producer.send(record);
-		producer.flush();
-		producer.close();
 		
+		customerProducer.send(customerRrecord);
+		addressProducer.send(addressRecord);
+		
+		customerProducer.flush();
+		customerProducer.close();
+		
+		addressProducer.flush();
+		addressProducer.close();
 	}
 
 }
