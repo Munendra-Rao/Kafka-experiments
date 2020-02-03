@@ -34,6 +34,8 @@ public class testThings2 {
 		System.out.println(first);
 		System.out.println(matcher.group());
 		
+		System.out.println(matcher.find());
+		
 
 	}
 
