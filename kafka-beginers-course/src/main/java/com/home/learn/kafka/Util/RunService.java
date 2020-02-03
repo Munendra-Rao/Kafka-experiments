@@ -39,6 +39,7 @@ public class RunService {
 				Set<ConstraintViolation<Employee>> violations=validator.validate(emp);
 				for (ConstraintViolation<Employee> violation : violations) {
 				    logger.error(violation.getMessage()); 
+				    logger.info("reject the object");
 				}
 				
 				//emp.setName("");
