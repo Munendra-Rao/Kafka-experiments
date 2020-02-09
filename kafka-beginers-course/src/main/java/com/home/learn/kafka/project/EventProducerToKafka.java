@@ -1,4 +1,4 @@
-package com.home.learn.kafka;
+package com.home.learn.kafka.project;
 
 import java.util.Properties;
 
@@ -9,20 +9,16 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.home.learn.kafka.project.JsonSerializer;
+import com.home.learn.kafka.ProducerDemoJsonExample;
 
-public class ProducerDemoJsonExample {
+public class EventProducerToKafka {
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String [] args) {
-	
+	public void produceToKafka(EFERJsonDto eferJsonDto){
+		
 		Logger logger=LoggerFactory.getLogger(ProducerDemoJsonExample.class);
-				
+		
 		String bootStrapServer="127.0.0.1:9092";
 		//define properties	
 		
@@ -31,18 +27,16 @@ public class ProducerDemoJsonExample {
 		properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 		properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class.getName());
 		
+		
 		String topic="first_topic";
 		String key="Key_"+Integer.toString(1);
 		
-		KafkaProducer producer=new KafkaProducer(properties);		
-		
-		Customer cus=new Customer(1, "Munendra");
-		
-		
-		
+		//producer
+		KafkaProducer producer=new KafkaProducer(properties);
+			
 		ObjectMapper mapper=new ObjectMapper();
 		
-		JsonNode value = mapper.valueToTree(cus);
+		JsonNode value = mapper.valueToTree(eferJsonDto);
         	producer.send(new ProducerRecord<>(topic,key,value), (metadata, exception) -> {
         		if (exception != null) {
         			logger.error("Error sending message {} on topic {} with key {} : {}", value, topic, key, exception);
@@ -52,8 +46,7 @@ public class ProducerDemoJsonExample {
 		producer.flush();
 		producer.close();
 		
-		//addressProducer.flush();
-		//addressProducer.close();
 	}
+
 
 }

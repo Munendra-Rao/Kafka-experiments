@@ -1,12 +1,19 @@
-package com.home.learn.kafka.model;
+package com.home.learn.kafka.project;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class EFER {
-	
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+public class EFERJsonDto {
+
 	private String sending_application;
 	private String site;
+	
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate movementDate;
 	private LocalTime movemenTime;
 	private long recordID;
@@ -15,14 +22,19 @@ public class EFER {
 	private String vin;
 	private String factoryCode;
 	private String psvOrder;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate integrationDate;
 	private LocalTime integrationTime;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate eventDate;
 	private LocalTime eventTime;
 	private String relatedCAFStatus;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate eliadeFunctionalDate;
 	private String logisticAddressCode;
 	
+	
+	public EFERJsonDto() {}
 	
 	public String getSending_application() {
 		return sending_application;
@@ -126,17 +138,9 @@ public class EFER {
 	public void setLogisticAddressCode(String logisticAddressCode) {
 		this.logisticAddressCode = logisticAddressCode;
 	}
-	@Override
-	public String toString() {
-		return "EFER [sending_application=" + sending_application + ", site=" + site + ", movementDate=" + movementDate
-				+ ", movemenTime=" + movemenTime + ", recordID=" + recordID + ", movementCode=" + movementCode
-				+ ", caf=" + caf + ", vin=" + vin + ", factoryCode=" + factoryCode + ", psvOrder=" + psvOrder
-				+ ", integrationDate=" + integrationDate + ", integrationTime=" + integrationTime + ", eventDate="
-				+ eventDate + ", eventTime=" + eventTime + ", relatedCAFStatus=" + relatedCAFStatus
-				+ ", eliadeFunctionalDate=" + eliadeFunctionalDate + ", logisticAddressCode=" + logisticAddressCode
-				+ "]";
-	}
 	
 	
-
+	
+	
+	
 }

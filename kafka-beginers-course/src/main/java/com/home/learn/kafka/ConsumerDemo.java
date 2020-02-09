@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.deser.std.JsonNodeDeserializer;
 import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
+import com.home.learn.kafka.project.JsonDeserializer;
 
 public class ConsumerDemo {
 	
@@ -42,7 +43,7 @@ public class ConsumerDemo {
 		//properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, new JsonPOJODeserializer<String>().getClass().getName());
 		//properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, new JsonPOJODeserializer<JsonNode>().getClass().getName());
 		properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-		properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, new JsonPOJODeserializer<>().getClass().getName());
+		properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class.getName());
 		properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId);
 		properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 		
